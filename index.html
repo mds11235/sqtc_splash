@@ -306,14 +306,22 @@
       display: none;
     }
 
+    .mobile-break {
+      display: none;
+    }
+
     @media (max-width: 640px) {
+      .mobile-break {
+        display: block;
+      }
+
       .floating-title {
-        top: 15%;
+        top: 12%;
         font-size: clamp(2rem, 8vw, 3rem);
       }
 
       .floating-subtitle {
-        top: 28%;
+        top: 30%;
         font-size: clamp(1.3rem, 5vw, 1.8rem);
       }
 
@@ -366,8 +374,8 @@
   </style>
 </head>
 <body>
-  <div class="floating-title">Side Quest Treasure Chest</div>
-  <div class="floating-subtitle">Coming Soon!</div>
+  <div class="floating-title">Side Quest<br class="mobile-break"> Treasure Chest</div>
+  <div class="floating-subtitle">Coming Soon</div>
 
   <!-- Always visible gems (0-45% - above both wizard paths) -->
   <img src="gems/emerald.png" class="gem" style="top: 5%; left: 10%; animation-delay: 0s;">
