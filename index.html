@@ -238,8 +238,8 @@
     .wizard::before {
       content: '';
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 25%;
+      left: 25%;
       transform: translate(-50%, -50%);
       width: 300px;
       height: 300px;
@@ -518,8 +518,18 @@
 
     function updateGemVisibility() {
       const wizardRect = wizard.getBoundingClientRect();
-      const wizardX = wizardRect.left + wizardRect.width / 2;
-      const wizardY = wizardRect.top + wizardRect.height / 2;
+
+      // Get the current transform to detect if wizard is flipped
+      const transform = window.getComputedStyle(wizard).transform;
+      const isFlipped = transform.includes('matrix(-1') || transform.includes('scaleX(-1)');
+
+      // Torch is in wizard's hand (left side when not flipped, right side when flipped)
+      // Offset to torch flame position: ~25% offset horizontally, ~25% up from wizard center
+      const torchOffsetX = isFlipped ? wizardRect.width * 0.25 : -wizardRect.width * 0.25;
+      const torchOffsetY = -wizardRect.height * 0.25;
+
+      const wizardX = wizardRect.left + wizardRect.width / 2 + torchOffsetX;
+      const wizardY = wizardRect.top + wizardRect.height / 2 + torchOffsetY;
 
       gems.forEach(gem => {
         const gemRect = gem.getBoundingClientRect();
